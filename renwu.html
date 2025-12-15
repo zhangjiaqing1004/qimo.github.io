@@ -1,0 +1,41 @@
+<!-- renwu.html - 人物介绍页面 -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>海绵宝宝网页</title>
+    <!-- 引入人物页面专用样式表 -->
+    <link rel="stylesheet" type="text/css" href="css/renwu.css" />
+  </head>
+  <!-- 内联样式设置背景色（不推荐，应使用CSS） -->
+  <body bgcolor="#53d3ec">
+    <!-- Logo区域：显示网站Logo图片 -->
+    <div class="f1"><img src="./images/logo.jpg"></div>
+    
+    <!-- 外层容器：包含页面主要内容 -->
+    <div class="fa">
+      <!-- 导航菜单，使用无序列表实现，包含首页、人物、商城、登录链接 -->
+      <ul>
+        <a href="shouye.html">首页</a>
+        <a href="renwu.html" class="active">人物</a>
+        <a href="shangcheng.html">商城</a>
+        <a href="denglu.html">登录</a>
+      </ul>
+      <!-- 人物图片展示区域，包含6个人物图片，使用img标签显示 -->
+      <div class="fa-1">
+        <a><img src="images/rw1.png"/></a>
+        <a><img src="images/rw2.png"/></a>
+        <a><img src="images/rw3.png"/></a>
+        <a><img src="images/rw4.png"/></a>
+        <a><img src="images/rw5.png"/></a>
+        <a><img src="images/rw6.png"/></a>
+      </div>
+      <!-- 返回首页链接，使用行内样式设置浮动、外边距和字体大小 -->
+      <p style="float: right; margin-top: 30px; font-size: 19px">
+        <a href="shouye.html">返回首页</a>
+      </p>
+      <!-- 页脚区域：显示版权信息 -->
+      <div class="f2">版权所有|©海绵宝宝 行政编号4651600</div>
+    </div>
+  </body>
+</html>

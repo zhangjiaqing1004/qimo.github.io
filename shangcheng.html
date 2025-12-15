@@ -1,0 +1,163 @@
+<!-- shangcheng.html - 商城页面 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>海绵宝宝周边商城</title>
+    <!-- 引入商城页面专用样式表 -->
+    <link rel="stylesheet" type="text/css" href="css/shangcheng.css">
+    <style>
+        /* 购物车模态框样式：默认隐藏，全屏半透明背景 */
+        .modal {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5)}
+        /* 模态框内容区域样式：白色背景、固定宽度、圆角 */
+        .modal-content {background:#fff;width:500px;margin:100px auto;padding:20px;border-radius:10px}
+        /* 购物车项样式：内边距、底部边框、弹性布局两端对齐 */
+        .cart-item {padding:10px;border-bottom:1px solid #eee;display:flex;justify-content:space-between}
+        /* 总计区域样式：文字右对齐、字体大小和背景色 */
+        .total {text-align:right;font-size:18px;padding:10px;background:#f5f5f5}
+    </style>
+</head>
+<body>
+    <!-- 页面主容器 -->
+    <div class="container">
+        <!-- 导航菜单 -->
+        <nav>
+            <a href="shouye.html">首页</a>
+            <a href="renwu.html">人物</a>
+            <a href="shangcheng.html" class="active">商城</a>
+            <a href="denglu.html">登录</a>
+        </nav>       
+        <!-- 购物车概览区域 -->
+        <div class="cart-summary">
+            <h2>比奇堡集市</h2>
+            <div class="search-cart">
+                <!-- 搜索输入框，支持回车键搜索 -->
+                <input type="text" id="searchInput" placeholder="搜索商品..." onkeypress="if(event.key=='Enter')search()">
+                <button onclick="search()">搜索</button>
+                <!-- 购物车信息显示：商品数量和总价 -->
+                <div class="cart-info">
+                    购物车: <span id="cartCount">0</span>件 ¥<span id="cartTotal">0</span>
+                    <button onclick="showCart()">查看</button>
+                </div>
+            </div>
+        </div>   
+        <!-- 商品展示区域，使用网格布局 -->
+        <div class="products">
+            <!-- 商品项1：海绵宝宝的快乐，点击添加到购物车 -->
+            <div class="product" data-name="海绵宝宝的快乐" onclick="addToCart('p1','海绵宝宝的快乐',666)">
+                <img src="images/o1.jpg">
+                <h4>海绵宝宝的快乐</h4>
+                <div class="price">¥666 <p>加入购物车</p></div>
+            </div>
+            <!-- 商品项2：派大星的智商 -->
+            <div class="product" data-name="派大星的智商" onclick="addToCart('p2','派大星的智商',0)">
+                <img src="images/o2.jpg">
+                <h4>派大星的智商</h4>
+                <div class="price">¥0 <p>加入购物车</p></div>
+            </div>
+            <!-- 商品项3：章鱼哥的艺术天赋 -->
+            <div class="product" data-name="章鱼哥的艺术天赋" onclick="addToCart('p3','章鱼哥的艺术天赋',111)">
+                <img src="images/o3.jpg">
+                <h4>章鱼哥的艺术天赋 </h4>
+                <div class="price">¥111 <p>加入购物车</p></div>
+            </div>
+            <!-- 商品项4：大方的蟹老板 -->
+            <div class="product" data-name="大方的蟹老板" onclick="addToCart('p4','大方的蟹老板',999)">
+                <img src="images/o4.jpg">
+                <h4>大方的蟹老板</h4>
+                <div class="price">¥999 <p>加入购物车</p></div>
+            </div>
+            <!-- 商品项5：助人为了痞老板 -->
+            <div class="product" data-name="助人为了痞老板" onclick="addToCart('p5','助人为了痞老板',1)">
+                <img src="images/o5.jpg">
+                <h4>助人为了痞老板 </h4>
+                <div class="price">¥1 <p>加入购物车</p></div>
+            </div>
+            <!-- 商品项6：金刚屁屁 -->
+            <div class="product" data-name="金刚屁屁" onclick="addToCart('p6','金刚屁屁',99)">
+                <img src="images/o6.jpg">
+                <h4>金刚屁屁</h4>
+                <div class="price">¥99 <p>加入购物车</p></div>
+            </div>
+        </div>    
+        <!-- 搜索结果消息显示区域，初始隐藏 -->
+        <div id="searchMsg" style="display:none;text-align:center;margin:20px 0"></div>
+        <!-- 返回首页链接 -->
+        <div class="back-home"><a href="shouye.html">返回首页</a></div>
+        <!-- 页脚版权信息 -->
+        <footer>版权所有|©海绵宝宝 行政编号4651600</footer>
+    </div> 
+    <!-- 购物车模态框，点击外部可关闭 -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <h3>购物车</h3>
+            <!-- 购物车项目列表容器 -->
+            <div id="cartItems">购物车是空的</div>
+            <!-- 购物车总计信息 -->
+            <div class="total">
+                总计: ¥<span id="modalTotal">0</span>
+                共 <span id="modalCount">0</span>件
+            </div>
+            <!-- 操作按钮区域 -->
+            <div style="display:flex;gap:10px;margin-top:20px">
+                <button onclick="hideCart()">关闭</button>
+                <button onclick="checkout()" style="background:#ff4444;color:#fff">结算</button>
+            </div>
+        </div>
+    </div> 
+<script>
+// 购物车功能JavaScript代码
+// 从localStorage获取购物车数据，如果没有则初始化为空对象
+let cart = JSON.parse(localStorage.getItem('cart')) || {};
+// 添加商品到购物车函数
+function addToCart(id,name,price){
+    cart[id] = cart[id] ? {...cart[id], qty:cart[id].qty+1} : {name,price,qty:1};
+    localStorage.setItem('cart',JSON.stringify(cart));
+    updateCart();
+}
+// 更新购物车显示函数：计算总价和数量，更新DOM
+function updateCart(){
+    let t=0,c=0;
+    for(let id in cart){t+=cart[id].price*cart[id].qty;c+=cart[id].qty}
+    cartCount.textContent=c;cartTotal.textContent=t;
+    modalCount.textContent=c;modalTotal.textContent=t;
+    cartItems.innerHTML=Object.keys(cart).length?
+        Object.keys(cart).map(id=>`<div class="cart-item">${cart[id].name} ¥${cart[id].price}×${cart[id].qty}=¥${cart[id].price*cart[id].qty}<button onclick="removeItem('${id}')">删除</button></div>`).join(''):
+        '购物车是空的';
+}
+// 删除购物车项函数
+function removeItem(id){
+    if(confirm('删除？')){delete cart[id];localStorage.setItem('cart',JSON.stringify(cart));updateCart()}
+}
+// 显示购物车模态框
+function showCart(){updateCart();cartModal.style.display='block'}
+// 隐藏购物车模态框
+function hideCart(){cartModal.style.display='none'}
+// 结算函数：检查购物车是否为空，检查登录状态，提示结算信息
+function checkout(){
+    if(!Object.keys(cart).length) return alert('购物车为空');
+    if(!localStorage.getItem('spongebob_login')) return confirm('请先登录') && (location.href='denglu.html');
+    alert(`结算成功！总金额: ¥${modalTotal.textContent}`);
+    if(confirm('清空购物车？')){cart={};localStorage.removeItem('cart');updateCart();hideCart()}
+}
+// 搜索商品函数：根据输入内容筛选商品并显示结果
+function search(){
+    const term=searchInput.value.trim().toLowerCase();
+    const msg=searchMsg,ps=document.querySelectorAll('.product');
+    let c=0;
+    ps.forEach(p=>{
+        const show=p.getAttribute('data-name').toLowerCase().includes(term);
+        p.style.display=show?'block':'none';
+        if(show)c++;
+    });
+    msg.style.display='block';
+    msg.innerHTML=c?`找到${c}个相关商品`:`没有找到"${term}"的商品`;
+    msg.style.color=c?'#134373':'#ff4444';
+}
+// 点击模态框外部关闭购物车
+document.addEventListener('click',e=>{if(e.target.id=='cartModal')hideCart()});
+// 页面加载时更新购物车显示
+updateCart();
+</script>
+</body>
+</html>

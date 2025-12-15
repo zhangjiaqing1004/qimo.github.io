@@ -1,0 +1,63 @@
+<!-- denglu.html - 登录页面 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>海绵宝宝 - 登录</title>
+    <!-- 引入登录页面专用样式表 -->
+    <link rel="stylesheet" href="css/denglu.css">
+</head>
+<body>
+    <!-- 页头：显示Logo图片 -->
+    <div class="header"><img src="./images/logo.jpg" width="1100" height="130"></div>   
+    <!-- 导航菜单 -->
+    <nav>
+        <a href="shouye.html">首页</a>
+        <a href="renwu.html">人物</a>
+        <a href="shangcheng.html">商城</a>
+        <a href="denglu.html" class="active">登录</a>
+    </nav>  
+    <!-- 登录表单区域 -->
+    <div class="login-box">
+        <h2>手机号登录</h2>
+        <!-- 手机号输入框，限制11位数字 -->
+        <input type="tel" id="phone" placeholder="11位手机号" maxlength="11">
+        <!-- 密码输入框 -->
+        <input type="password" id="password" placeholder="密码">
+        <!-- 登录按钮 -->
+        <button onclick="login()">登录</button>
+        <!-- 重置按钮 -->
+        <button onclick="resetForm()">重置</button>
+        <!-- 注册链接 -->
+        <div class="register">还没有账号？ <a href="#">立即注册</a></div>
+        <!-- 返回首页链接 -->
+        <div class="back-home"><a href="shouye.html">← 返回首页</a></div>
+    </div>  
+    <!-- 页脚版权信息 -->
+    <footer>版权所有 | © 海绵宝宝 行政编号: 4651600</footer>   
+    <script>
+        // 登录页面JavaScript代码
+        // 检查是否已登录，如果已登录则跳转到首页
+        if (localStorage.getItem('spongebob_login')) location.href = 'shouye.html';
+        // 登录函数：验证手机号和密码，保存登录信息
+        function login() {
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;   
+            // 验证手机号格式（11位数字）
+            if (!/^\d{11}$/.test(phone)) return alert('请输入11位手机号');
+            // 验证密码是否为空
+            if (!password) return alert('请输入密码');  
+            // 保存登录信息到localStorage
+            localStorage.setItem('spongebob_login', JSON.stringify({phone}));
+            alert('登录成功！');
+            // 跳转到首页
+            location.href = 'shouye.html';
+        }       
+        // 重置表单函数：清空输入框内容
+        function resetForm() {
+            document.getElementById('phone').value = '';
+            document.getElementById('password').value = '';
+        }
+    </script>
+</body>
+</html>
