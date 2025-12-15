@@ -1,0 +1,17 @@
+/* 设置页面背景：使用images文件夹中的hezhao.jpg平铺并固定位置 */
+body{
+	background: url(../images/hezhao.jpg) repeat fixed center;
+}
+/* 图片样式规则 */
+img{
+	width: 506px;        /* 固定宽度 */
+	height: 188px;       /* 固定高度 */
+	position: absolute;  /* 绝对定位，脱离文档流 */
+	top: 250px;          /* 距顶部距离 */
+	left: 450px;         /* 距左侧距离 */
+	transition: all 1s;  /* 所有属性变化使用1秒过渡效果 */
+}
+/* 鼠标悬停时的图片效果 */
+img:hover{
+	transform: scale(0.8); /* 缩小到原尺寸的80% */
+}

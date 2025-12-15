@@ -1,0 +1,71 @@
+/* renwu.css - 人物页面样式 */
+
+/* 全局重置：居中对齐，清除内边距，使用border-box盒子模型 */
+* {
+  margin: auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 页面主体背景色 */
+body {
+  background: #53d3ec;
+}
+
+/* 外层容器样式：固定宽度和文字颜色 */
+.fa {
+  width: 1100px;
+  color: aliceblue;
+}
+
+/* 导航栏样式 - 移除悬停和激活状态效果 */
+ul {
+  list-style: none; /* 去除列表样式 */
+  width: 1100px; /* 固定宽度 */
+  margin: 20px auto; /* 上下外边距20px，左右自动居中 */
+  background: #134373; /* 背景色 */
+  display: flex; /* 弹性布局 */
+  border-radius: 10px; /* 圆角 */
+  overflow: hidden; /* 隐藏溢出内容 */
+}
+
+/* 导航链接样式：块级显示，100%宽度，文字居中 */
+ul a {
+  display: block;
+  width: 100%;
+  line-height: 60px; /* 行高等于高度，实现垂直居中 */
+  text-align: center; /* 文字居中 */
+  color: aliceblue; /* 文字颜色 */
+  float: left; /* 左浮动 */
+  text-decoration: none; /* 去除下划线 */
+  font-size: 19px; /* 字体大小 */
+  background-color: #134373; /* 背景色 */
+  /* 删除transition过渡效果 */
+}
+
+/* 激活状态导航链接样式：半透明白色背景 */
+ul a.active{
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Logo区域样式：固定宽高 */
+.f1 {
+  width: 1100px;
+  height: 130px;
+}
+
+/* 人物图片区域样式：固定宽高和左内边距 */
+.fa-1 {
+  width: 1100px;
+  height: 650px;
+  padding-left: 100px;
+}
+
+/* 页脚样式：左浮动，背景色，行高，100%宽度，文字居中 */
+.f2 {
+  float: left;
+  background-color: #134373;
+  line-height: 40px;
+  width: 100%;
+  text-align: center;
+}

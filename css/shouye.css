@@ -1,0 +1,120 @@
+/* shouye.css - 首页样式 */
+
+/* 全局重置：清除内边距，使用border-box盒子模型 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 页面主体背景色 */
+body {
+    background: #53d3ec;
+}
+
+/* 页头样式：固定宽高和居中 */
+.header {
+    width: 1100px;
+    height: 130px;
+    margin: auto;
+}
+
+/* 导航栏样式：固定宽高、弹性布局、背景色和圆角 */
+nav {
+    height: 60px;
+    width: 1100px;
+    margin: 20px auto;
+    display: flex;
+    background: #134373;
+    border-radius: 10px;
+}
+
+/* 导航链接样式：等分宽度、文字居中、内边距和去下划线 */
+nav a {
+    flex: 1;
+    color: #fff;
+    text-align: center;
+    padding: 15px 0;
+    text-decoration: none;
+}
+
+/* 激活状态导航链接样式：半透明白色背景 */
+nav a.active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* 横幅区域样式：固定宽度和居中 */
+.banner {
+    width: 1100px;
+    margin: auto;
+}
+
+/* 横幅图片样式：100%宽度 */
+.banner img {
+    width: 1100px;
+}
+
+/* 内容区域样式：固定宽度、居中和弹性布局 */
+.content {
+    width: 1100px;
+    margin: auto;
+    display: flex;
+    height: 540px;
+}
+
+/* 左侧内容样式：固定宽度、外边距、行高和文字颜色 */
+.left {
+    width: 550px;
+    margin: 50px 30px 0;
+    line-height: 32px;
+    color: #fff;
+}
+
+/* 左侧标题样式：字体大小和下边距 */
+.left h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+/* 左侧段落样式：首行缩进2字符和下边距 */
+.left p {
+    text-indent: 2em;
+    margin-bottom: 10px;
+}
+
+/* 右侧内容样式：固定宽高、外边距、背景图片和文字颜色 */
+.right {
+    width: 550px;
+    height: 522px;
+    margin: 30px;
+    background: url(../images/jrsy-2.jpg) no-repeat;
+    color: #d8d8d8;
+    padding-top: 310px;
+    line-height: 28px;
+}
+
+/* 右侧标题样式：字体大小和下边距 */
+.right h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+/* 右侧段落样式：首行缩进2字符 */
+.right p {
+    text-indent: 2em;
+}
+
+/* 页脚样式：居中、背景色、文字颜色和弹性布局 */
+footer {
+    margin: auto;
+    background: #134373;
+    color: #fff;
+    line-height: 40px;
+    width: 1100px;
+    margin-top: 20px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
